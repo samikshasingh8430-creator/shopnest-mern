@@ -40,7 +40,7 @@ app.use("/api/analytics",require("./routes/analyticsRoutes"));
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static(Path.join(__dirname, '../frontend/build')));
 
-    app.get('*',(req,res)=>{
+    app.get('/{*path}',(req,res)=>{
         res.sendFile(Path.resolve(__dirname,'../frontend/build/index.html'))
     })
 }else{
