@@ -1,0 +1,31 @@
+const  Order = require("../model/Order");
+const User = require("../model/User");
+const Product = require("../model/product");
+
+const getAdminStatus = async (req, res) => {
+  try {
+    const totalUsers = await User.countDocuments({role: 'user'});
+    const totalOrders = await Order.countDocuments({});
+    const totalProducts = await Product.countDocuments();
+
+
+    const orders = await Order.find({});
+    
+
+    const totalRevenueData = orders.reduce((acc, order) => acc + order.totalAmount, 0);
+
+    res.status(200).json({
+        totalUsers,
+        totalOrders,
+        totalProducts,
+        totalRevenue: totalRevenueData
+    });
+  }
+    catch (error) {
+        res.status(500).json({
+            message: 'Error fetching status',
+             error
+        });
+    }
+};
+module.exports = {getAdminStatus};

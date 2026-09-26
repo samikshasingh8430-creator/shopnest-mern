@@ -1,0 +1,13 @@
+.env
+.env.*
+**/.env
+**/.env.*
+tmp/
+**/tmp/
+!.env.example
+!**/.env.example
+node_modules
+**/node_modules
+**/build/
+**/uploads/
+*.log
